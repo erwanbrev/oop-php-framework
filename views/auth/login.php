@@ -16,7 +16,7 @@
 
 <h1>Se connecter</h1>
 
-<form action="/login" method="POST">
+<form action="<?= HREF_ROOT ?>login" method="POST">
     <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" class="form-control" name="username" id="username">

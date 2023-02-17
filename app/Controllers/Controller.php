@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 use Database\DBConnection;
 
-abstract class Controller {
+abstract class Controller
+{
 
     protected $db;
 
@@ -16,11 +17,16 @@ abstract class Controller {
 
         $this->db = $db;
     }
-
+    /** 
+     * 1er argument => chemin vers les vues
+     * 2eme // => tableau nulle par défaut 
+     */
     protected function view(string $path, array $params = null)
     {
         ob_start();
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
+        // var_dump("Controller view",VIEWS , $path);
+        //die();
         require VIEWS . $path . '.php';
         $content = ob_get_clean();
         require VIEWS . 'layout.php';
@@ -36,7 +42,7 @@ abstract class Controller {
         if (isset($_SESSION['auth']) && $_SESSION['auth'] === 1) {
             return true;
         } else {
-            return header('Location: /login');
+            return header('Location:' . HREF_ROOT . 'login');
         }
     }
 }

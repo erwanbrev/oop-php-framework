@@ -37,18 +37,22 @@ class PostController extends Controller {
         $result = $post->create($_POST, $tags);
 
         if ($result) {
-            return header('Location: /admin/posts');
+            return header('Location:'.HREF_ROOT.'admin/posts');
         }
     }
 
     public function edit(int $id)
     {
+       // var_dump("Model edit:", $id);
         $this->isAdmin();
 
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
-
+        
+        //var_dump("Model edit:", $post);
+        //var_dump("Model edit:", $tags);
         return $this->view('admin.post.form', compact('post', 'tags'));
+        //return $this->view('admin.post.form', compact('post'));
     }
 
     public function update(int $id)
@@ -57,12 +61,14 @@ class PostController extends Controller {
 
         $post = new Post($this->getDB());
 
+        // var_dump("PostController update:",$_POST);
         $tags = array_pop($_POST);
+       // var_dump("PostController update:",$_POST, $tags);
 
         $result = $post->update($id, $_POST, $tags);
 
         if ($result) {
-            return header('Location: /admin/posts');
+            return header('Location: '.HREF_ROOT.'admin/posts');
         }
     }
 
@@ -74,7 +80,7 @@ class PostController extends Controller {
         $result = $post->destroy($id);
 
         if ($result) {
-            return header('Location: /admin/posts');
+            return header('Location: '.HREF_ROOT.'admin/posts');
         }
     }
 }

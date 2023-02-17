@@ -1,5 +1,12 @@
 RewriteEngine On
+#permet la réécriture
 
+#ajout d'une condition
+#si on a effectivement un fichier => pas de redirection
+#!-f => si pas de fichier atteignable -> redirection
 RewriteCond %{REQUEST_FILENAME} !-f
 
+#.* => tout renvoyer sur public/index.php
+#QSA permet d'enchainer les param si plusieurs existants
+#L => derniere url atteinte
 RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]

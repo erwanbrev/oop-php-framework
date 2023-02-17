@@ -17,10 +17,10 @@ abstract class Model {
 
     public function all(): array
     {
-        return $this->query("SELECT * FROM {$this->table} ORDER BY created_at DESC");
+        return $this->query("SELECT * FROM {$this->table} "); //BUG avec tag ORDER BY created_at DESC
     }
 
-    public function findById(int $id): Model
+    public function findByid(int $id): Model
     {
         return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
     }
@@ -65,6 +65,8 @@ abstract class Model {
 
     public function query(string $sql, array $param = null, bool $single = null)
     {
+       // echo "</br>Model query: " . $sql;
+       // var_dump( "</br>Model param: " , $param);
         $method = is_null($param) ? 'query' : 'prepare';
 
         if (

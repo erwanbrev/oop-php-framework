@@ -5,4 +5,4 @@
     <?php endforeach ?>
 </div>
 <p><?= $params['post']->content ?></p>
-<a href="/posts" class="btn btn-secondary">Retourner en arrière</a>
+<a href="<?= HREF_ROOT ?>posts" class="btn btn-secondary">Retourner en arrière</a>

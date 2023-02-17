@@ -3,17 +3,26 @@
 use Router\Router;
 use App\Exceptions\NotFoundException;
 
-require '../vendor/autoload.php';
 
+require '../vendor/autoload.php';
+//Indiquer la racine de votre site ici HREF_ROOT. Si votre site en localhost est à la racine indiquer /
+define('HREF_ROOT', 'http://localhost:8888/1-exos/6-Blog/PooBlog/');
+// Not in use now. J'ai utilisé cette constante pour trouvé des bugs dans le les formulaire. Est peut remplacer HREF_ROOT
+define('VIEWS_FORM_ROOT', '../../../');
+
+/** Constante pointant vers les vues(VIEWS)
+ * dirname(__DIR__) -> 
+*/
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
-define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
-define('DB_NAME', 'myapp');
+//define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR); // Code original
+define('SCRIPTS', HREF_ROOT . 'public/');
+define('DB_NAME', 'myappBlog');
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
 define('DB_PWD', '');
 
 $router = new Router($_GET['url']);
-
+/** intégration du namespace en début de lien avec : 'App\Controllers\ */
 $router->get('/', 'App\Controllers\BlogController@welcome');
 $router->get('/posts', 'App\Controllers\BlogController@index');
 $router->get('/posts/:id', 'App\Controllers\BlogController@show');
