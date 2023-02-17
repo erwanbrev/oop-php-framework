@@ -11,10 +11,15 @@ define('HREF_ROOT', 'http://localhost:8888/1-exos/6-Blog/PooBlog/');
 define('VIEWS_FORM_ROOT', '../../../');
 
 /** Constante pointant vers les vues(VIEWS)
- * dirname(__DIR__) -> 
+ * dirname(__DIR__) -> appelle le dossier dans lequel nous sommes, dirname -> retour en arriere '../'
+ * 'views' -> dossier du même nom
 */
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 //define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR); // Code original
+/** constante pointant vers les scripts 
+ * HREF_ROOT -> dossier d'origine des scripts
+ * Informations concernant l'accès à la BDD
+*/
 define('SCRIPTS', HREF_ROOT . 'public/');
 define('DB_NAME', 'myappBlog');
 define('DB_HOST', '127.0.0.1');

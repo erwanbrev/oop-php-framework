@@ -23,11 +23,17 @@ abstract class Controller
      */
     protected function view(string $path, array $params = null)
     {
+        /** demarre le systeme de buffering */
         ob_start();
+        /** on recherche les eventuels '.' et on les remplace par un directory_separator */
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
         // var_dump("Controller view",VIEWS , $path);
         //die();
+        /** besoin d'une vue dans le dossier view et on concatene le path avec extension obligatoire
+         * vues => .php
+         */
         require VIEWS . $path . '.php';
+        /** stocker notre vue quelque part dans notre variable */
         $content = ob_get_clean();
         require VIEWS . 'layout.php';
     }

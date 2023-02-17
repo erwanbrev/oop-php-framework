@@ -1,4 +1,5 @@
 <h1><?= $params['post']->title ?></h1>
+/** echo de la variable params avec le post initialisé */
 <div>
     <?php foreach ($params['post']->getTags() as $tag) : ?>
         <span class="badge badge-info"><?= $tag->name ?></span>
