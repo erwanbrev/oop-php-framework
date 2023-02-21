@@ -4,19 +4,18 @@ namespace App\Controllers;
 
 use Database\DBConnection;
 
-/** controller est instancié au niveau de Route.php */
+/** class qui n'est pas directement instanciée donc ABSTRACT */
 abstract class Controller
 {
-
+    /** la connexion se ferait que dans les classes ENFANTS donc PROTECTED ONLY */
     protected $db;
-
     /** a construction du controller tu vas prendre une instance de db avec DBConnection */
     public function __construct(DBConnection $db)
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-
+        /** on y stocke la connexion à la BDD */
         $this->db = $db;
     }
     /** 
@@ -40,6 +39,7 @@ abstract class Controller
         require VIEWS . 'layout.php';
     }
 
+    /** fonction permettant de retourner le return ci-dessous */
     protected function getDB()
     {
         return $this->db;

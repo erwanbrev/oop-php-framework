@@ -5,8 +5,12 @@ namespace App\Models;
 use DateTime;
 use App\Models\Tag;
 
-class Post extends Model {
-
+/** class Post
+ * Post.php est ici un enfant du model parent (generique) nommmé Model.php
+ * Post étend ici des fonctions de Model
+ * */
+class Post extends Model
+{
     protected $table = 'posts';
 
     public function getCreatedAt(): string
@@ -21,7 +25,7 @@ class Post extends Model {
 
     public function getButton(): string
     {
-        return '<a href="'.HREF_ROOT.'posts/'.$this->id.'" class="btn btn-primary">Lire l article</a>';
+        return '<a href="' . HREF_ROOT . 'posts/' . $this->id . '" class="btn btn-primary">Lire l article</a>';
         // return <<<HTML
         // <a href="http://localhost/oop-php-framework/posts/$this->id" class="btn btn-primary">Lire l'article</a>
         // HTML;
@@ -74,6 +78,5 @@ class Post extends Model {
         if ($result) {
             return true;
         }
-
     }
 }

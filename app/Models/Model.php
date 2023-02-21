@@ -2,19 +2,28 @@
 
 namespace App\Models;
 
+/** Model.php est un fichier generique dit PARENT */
+
 use PDO;
 use Database\DBConnection;
 
-abstract class Model {
-
+abstract class Model
+{
+    /** la connexion se ferait que dans les classes ENFANTS donc PROTECTED ONLY */
     protected $db;
     protected $table;
 
     public function __construct(DBConnection $db)
     {
+        /** on y stocke la connexion à la BDD */
         $this->db = $db;
     }
 
+    /**
+     * fonction all() => $this->table cherche dans $table MAIS :
+     * $protected $table est nul
+     * En revanche si fonction all() effectuée depuis Post.php -> elle sera égale à son contenu
+     */
     public function all(): array
     {
         return $this->query("SELECT * FROM {$this->table} "); //BUG avec tag ORDER BY created_at DESC
@@ -65,14 +74,15 @@ abstract class Model {
 
     public function query(string $sql, array $param = null, bool $single = null)
     {
-       // echo "</br>Model query: " . $sql;
-       // var_dump( "</br>Model param: " , $param);
+        // echo "</br>Model query: " . $sql;
+        // var_dump( "</br>Model param: " , $param);
         $method = is_null($param) ? 'query' : 'prepare';
 
         if (
             strpos($sql, 'DELETE') === 0
             || strpos($sql, 'UPDATE') === 0
-            || strpos($sql, 'INSERT') === 0) {
+            || strpos($sql, 'INSERT') === 0
+        ) {
 
             $stmt = $this->db->getPDO()->$method($sql);
             $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);

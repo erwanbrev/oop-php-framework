@@ -20,6 +20,10 @@ class BlogController extends Controller
     /** fonction permettant d'indiquer la homepage et ses posts  */
     public function index()
     {
+        /** post
+         * nouvelle instance du model Post
+         * recupere tous les postes
+         */
         $post = new Post($this->getDB());
         $posts = $post->all();
         /** affiche la page index.php 
