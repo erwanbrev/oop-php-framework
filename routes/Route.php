@@ -61,7 +61,8 @@ class Route
          * on explose par l'@ -> l'action 
          */
         $params = explode('@', $this->action);
-        /** premiere clé */
+        /** premiere clé
+        */
         $controller = new $params[0](new DBConnection(DB_NAME, DB_HOST, DB_USER, DB_PWD));
         /** deuxieme clé */
         $method = $params[1];

@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 use Database\DBConnection;
 
+/** controller est instancié au niveau de Route.php */
 abstract class Controller
 {
 
     protected $db;
 
+    /** a construction du controller tu vas prendre une instance de db avec DBConnection */
     public function __construct(DBConnection $db)
     {
         if (session_status() === PHP_SESSION_NONE) {

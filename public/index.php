@@ -13,13 +13,13 @@ define('VIEWS_FORM_ROOT', '../../../');
 /** Constante pointant vers les vues(VIEWS)
  * dirname(__DIR__) -> appelle le dossier dans lequel nous sommes, dirname -> retour en arriere '../'
  * 'views' -> dossier du même nom
-*/
+ */
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 //define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR); // Code original
 /** constante pointant vers les scripts 
  * HREF_ROOT -> dossier d'origine des scripts
  * Informations concernant l'accès à la BDD
-*/
+ */
 define('SCRIPTS', HREF_ROOT . 'public/');
 define('DB_NAME', 'myappBlog');
 define('DB_HOST', '127.0.0.1');
@@ -27,7 +27,11 @@ define('DB_USER', 'root');
 define('DB_PWD', '');
 
 $router = new Router($_GET['url']);
-/** intégration du namespace en début de lien avec : 'App\Controllers\ */
+/** intégration du namespace en début de lien avec : 'App\Controllers\ 
+ * '/' -> une page appelée 'welcome'
+ * '/posts' -> liste de tous les articles
+ * '/posts/:id' -> fonction SHOW
+ */
 $router->get('/', 'App\Controllers\BlogController@welcome');
 $router->get('/posts', 'App\Controllers\BlogController@index');
 $router->get('/posts/:id', 'App\Controllers\BlogController@show');
