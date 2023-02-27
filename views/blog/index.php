@@ -4,7 +4,9 @@
     <div class="card mb-3">
         <div class="card-body">
             <h2><?= $post->title ?></h2>
-            <!-- fonction pour recuperer le tag -> getTags() lié au post en question -->
+            <!-- fonction pour recuperer le tag -> getTags() lié au post en question;
+            HREF_ROOT pointant vers '/tags/'
+             -->
             <div>
                 <?php foreach ($post->getTags() as $tag) : ?>
                     <span class="badge badge-success"><a href="<?= HREF_ROOT ?>tags/<?= $tag->id ?>" class="text-white"><?= $tag->name ?></a></span>

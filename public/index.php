@@ -37,6 +37,7 @@ $router = new Router($_GET['url']);
  * '/' -> une page appelée 'welcome'
  * '/posts' -> liste de tous les articles
  * '/posts/:id' -> fonction SHOW
+ * '@exemple' -> fonction particulière 
  */
 $router->get('/', 'App\Controllers\BlogController@welcome');
 $router->get('/posts', 'App\Controllers\BlogController@index');

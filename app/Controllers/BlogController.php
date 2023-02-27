@@ -43,7 +43,7 @@ class BlogController extends Controller
          */
         return $this->view('blog.show', compact('post'));
     }
-
+    /** */
     public function tag(int $id)
     {
         $tag = (new Tag($this->getDB()))->findById($id);
