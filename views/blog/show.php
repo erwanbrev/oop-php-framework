@@ -1,6 +1,6 @@
 <h1><?= $params['post']->title ?></h1>
-<!-- l'echo donne l'objet souhaité et l'element grâce au flechage  -->
- <!-- echo de la variable params avec le post initialisé  -->
+<!-- l'echo au dessus donne l'objet souhaité et l'element grâce au flechage echo de la variable params avec le post initialisé  -->
+<!-- div permettant de rendre les tags visibles sur un article -->
 <div>
     <?php foreach ($params['post']->getTags() as $tag) : ?>
         <span class="badge badge-info"><?= $tag->name ?></span>

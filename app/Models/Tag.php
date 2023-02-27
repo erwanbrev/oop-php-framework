@@ -7,6 +7,8 @@ class Tag extends Model
 
     protected $table = 'tags';
 
+    /* l'inner join si dessous signifie : 
+        post_tag avec alias 'pt' reliée avec ON ou pt.post_id = p.id */
     public function getPosts()
     {
         return $this->query("

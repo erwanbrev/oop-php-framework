@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-/** Model.php est un fichier generique dit PARENT */
+/** Model.php est un fichier generique dit PARENT 
+ * Il contient les fonctions génériques qui vont être utilisées dans le code
+ */
 
 use PDO;
 use Database\DBConnection;
@@ -12,7 +14,6 @@ abstract class Model
     /** la connexion se ferait que dans les classes ENFANTS donc PROTECTED ONLY */
     protected $db;
     protected $table;
-
     public function __construct(DBConnection $db)
     {
         /** on y stocke la connexion à la BDD */
@@ -28,9 +29,13 @@ abstract class Model
     {
         return $this->query("SELECT * FROM {$this->table} "); //BUG avec tag ORDER BY created_at DESC
     }
-
+    /** fonction permettant de trouver un post par son ID */
     public function findByid(int $id): Model
     {
+        /**
+         * selectionne tout + besoin de recuperer dynamiquement le nom de la table où le num d'ID à la valeur de 
+         * id = ? => empêche le piratage par insertion de donnée 
+         */
         return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
     }
 
@@ -71,11 +76,21 @@ abstract class Model
     {
         return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
     }
-
+    /** fonction query()
+     * elle permet d'éviter la duplication de code pour la recherche de post dans la bdd 
+     * dans les fonctions all() et findById()
+     * string car requete SQL
+     * array NULL car
+     * bool NULL -> fetchAll() | True -> fetch()
+     */
     public function query(string $sql, array $param = null, bool $single = null)
     {
         // echo "</br>Model query: " . $sql;
         // var_dump( "</br>Model param: " , $param);
+        /** method
+         * is_null => pas d'argum en param
+         * sinon ->prepare
+         */
         $method = is_null($param) ? 'query' : 'prepare';
 
         if (
@@ -88,12 +103,18 @@ abstract class Model
             $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
             return $stmt->execute($param);
         }
-
+        /** fetch
+         * si NULL -> fetchAll()
+         * sinon -> fetch
+         */
         $fetch = is_null($single) ? 'fetchAll' : 'fetch';
 
         $stmt = $this->db->getPDO()->$method($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
 
+        /** si il y a une query -> fetch()
+         * sinon (il y a un param) alors ->execute(param)-> return avec fetch()/fetchAll()
+         */
         if ($method === 'query') {
             return $stmt->$fetch();
         } else {

@@ -21,6 +21,12 @@ define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEP
  * Informations concernant l'accès à la BDD
  */
 define('SCRIPTS', HREF_ROOT . 'public/');
+/** definition de constantes 
+ * le nom de la bdd
+ * l'adresse 
+ * l'id
+ * le mdp
+ */
 define('DB_NAME', 'myappBlog');
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
