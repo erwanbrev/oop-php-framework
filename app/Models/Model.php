@@ -71,7 +71,9 @@ abstract class Model
 
         return $this->query("UPDATE {$this->table} SET {$sqlRequestPart} WHERE id = :id", $data);
     }
-
+    /** requête SQL permettant que lorsque destroy() est appelée, elle est l'action de supprimer un article de la table
+     * requête préparée grâce à '?' et [$id]
+     */
     public function destroy(int $id): bool
     {
         return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
@@ -92,7 +94,10 @@ abstract class Model
          * sinon ->prepare
          */
         $method = is_null($param) ? 'query' : 'prepare';
-
+        /** strpos
+         * permet de connaître la position d'une chaine de caractère
+         * si c'est 'N' === 0 
+         */
         if (
             strpos($sql, 'DELETE') === 0
             || strpos($sql, 'UPDATE') === 0
@@ -106,6 +111,7 @@ abstract class Model
         /** fetch
          * si NULL -> fetchAll()
          * sinon -> fetch
+         * setFetchMode permet de récupérer la bonne table
          */
         $fetch = is_null($single) ? 'fetchAll' : 'fetch';
 

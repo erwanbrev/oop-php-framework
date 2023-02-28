@@ -6,8 +6,17 @@ use App\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Tag;
 
-class PostController extends Controller {
-
+/** PostController
+ * est le fichier de controleur pour les articles
+ */
+class PostController extends Controller
+{
+    /** index
+     * sert à faire le listing des articles
+     * this->getDB dans le Post sert à faire un lien vers la base de donnée
+     * -> all() récupère tous les postes
+     * lien vers une vue qui contiendrait un admin/post/index.php
+     */
     public function index()
     {
         $this->isAdmin();
@@ -37,18 +46,18 @@ class PostController extends Controller {
         $result = $post->create($_POST, $tags);
 
         if ($result) {
-            return header('Location:'.HREF_ROOT.'admin/posts');
+            return header('Location:' . HREF_ROOT . 'admin/posts');
         }
     }
 
     public function edit(int $id)
     {
-       // var_dump("Model edit:", $id);
+        // var_dump("Model edit:", $id);
         $this->isAdmin();
 
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
-        
+
         //var_dump("Model edit:", $post);
         //var_dump("Model edit:", $tags);
         return $this->view('admin.post.form', compact('post', 'tags'));
@@ -63,24 +72,25 @@ class PostController extends Controller {
 
         // var_dump("PostController update:",$_POST);
         $tags = array_pop($_POST);
-       // var_dump("PostController update:",$_POST, $tags);
+        // var_dump("PostController update:",$_POST, $tags);
 
         $result = $post->update($id, $_POST, $tags);
 
         if ($result) {
-            return header('Location: '.HREF_ROOT.'admin/posts');
+            return header('Location: ' . HREF_ROOT . 'admin/posts');
         }
     }
-
+    /** fonction permettant de supprimer un article dans la base de donnée */
     public function destroy(int $id)
     {
         $this->isAdmin();
 
+        // $post = new Post($this->getDB()))->findById($id);
         $post = new Post($this->getDB());
         $result = $post->destroy($id);
 
         if ($result) {
-            return header('Location: '.HREF_ROOT.'admin/posts');
+            return header('Location: ' . HREF_ROOT . 'admin/posts');
         }
     }
 }

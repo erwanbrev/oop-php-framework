@@ -18,8 +18,8 @@ class Post extends Model
     /** getCreatedAt() -> bon formatage pour la date */
     public function getCreatedAt(): string
     {
-        /** format -> defini le jour/mois/annee et heures/minutes*/
-        return (new DateTime($this->created_at))->format('d/m/Y à H:m');
+        /** format -> defini le jour/mois/annee et heures/m = mois|i = minutes*/
+        return (new DateTime($this->created_at))->format('d/m/Y à H:i');
     }
     /** montrer un extrait d'un article sur la page des articles */
     public function getExcerpt(): string

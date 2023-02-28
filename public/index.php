@@ -55,6 +55,10 @@ $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@d
 $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 
+/** exception avec try / catch
+ * $e = error
+ * NotFoundException -> class
+ */
 try {
     $router->run();
 } catch (NotFoundException $e) {
