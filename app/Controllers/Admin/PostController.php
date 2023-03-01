@@ -49,7 +49,9 @@ class PostController extends Controller
             return header('Location:' . HREF_ROOT . 'admin/posts');
         }
     }
-
+    /** edit() 
+     * fonction edit permettant de récupérer les posts et les tags existants pour les rendre à l'écran, pour la lecture du développeur
+     */
     public function edit(int $id)
     {
         // var_dump("Model edit:", $id);
@@ -73,7 +75,6 @@ class PostController extends Controller
         // var_dump("PostController update:",$_POST);
         $tags = array_pop($_POST);
         // var_dump("PostController update:",$_POST, $tags);
-
         $result = $post->update($id, $_POST, $tags);
 
         if ($result) {

@@ -43,15 +43,28 @@ $router->get('/', 'App\Controllers\BlogController@welcome');
 $router->get('/posts', 'App\Controllers\BlogController@index');
 $router->get('/posts/:id', 'App\Controllers\BlogController@show');
 $router->get('/tags/:id', 'App\Controllers\BlogController@tag');
-
+/** login
+ * -> page login puis la valide avec les infos saisies puis possibiltié -> déconnexion
+ */
 $router->get('/login', 'App\Controllers\UserController@login');
 $router->post('/login', 'App\Controllers\UserController@loginPost');
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
+/** create
+ * get permet de récupérer la page de création d'un post
+ * post permet de créer le post pré-rempli
+ */
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
+/** delete
+ * route directement en post puisque NULLE besoin de récupérer un post -> juste le supprimer
+ */
 $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
+/** edit
+ * get permet de récupérer l'article existant
+ * post permet de mettre à jour la modification
+ */
 $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 

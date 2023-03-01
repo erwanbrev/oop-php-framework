@@ -24,7 +24,9 @@
                 <td><?= $post->getCreatedAt() ?></td>
                 <!-- trois boutons * un pour ajouter * un pour supprimer -->
                 <td>
+                    <!-- chemin vers la fonction d'édition -->
                     <a href="<?= HREF_ROOT ?>admin/posts/edit/<?= $post->id ?>" class="btn btn-warning">Modifier</a>
+                    <!-- chemin vers la fonction de suppression -->
                     <form action="<?= HREF_ROOT ?>admin/posts/delete/<?= $post->id ?>" method="POST" class="d-inline">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>

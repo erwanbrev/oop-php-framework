@@ -55,7 +55,9 @@ abstract class Model
         return $this->query("INSERT INTO {$this->table} ($firstParenthesis)
         VALUES($secondParenthesis)", $data);
     }
-
+    /** UPDATE
+     * $sqlRequestPart => partie de la requête SQL
+     */
     public function update(int $id, array $data, ?array $relations = null)
     {
         $sqlRequestPart = "";
@@ -68,7 +70,9 @@ abstract class Model
         }
 
         $data['id'] = $id;
-
+        /** UPDATE
+         * cherche à MAJ les composants de la table choisie à l'aide de ':'
+         */
         return $this->query("UPDATE {$this->table} SET {$sqlRequestPart} WHERE id = :id", $data);
     }
     /** requête SQL permettant que lorsque destroy() est appelée, elle est l'action de supprimer un article de la table
