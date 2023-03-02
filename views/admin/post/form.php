@@ -25,8 +25,11 @@
     </div>
     <div class="form-group">
         <label for="tags">Tags de l'article</label>
+        <!-- multiple class est une liste déroulante de tags -->
         <select multiple class="form-control" id="tags" name="tags[]">
+            <!-- on boucle sur les tags -->
             <?php foreach ($params['tags'] as $tag) : ?>
+                <!-- option va afficher un tag si à l'aide de la boucle, il en trouve un ou plusieurs -->
                 <option value="<?= $tag->id ?>" <?php if (isset($params['post'])) : ?> <?php foreach ($params['post']->getTags() as $postTag) {
                                                                                             echo ($tag->id === $postTag->id) ? 'selected' : '';
                                                                                         }

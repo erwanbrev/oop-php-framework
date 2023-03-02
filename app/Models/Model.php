@@ -57,12 +57,22 @@ abstract class Model
     }
     /** UPDATE
      * $sqlRequestPart => partie de la requête SQL
+     * '.=' => ajoute des keys au fur et a mesure que ça boucle
+     * 'keys' ici présence le name présent dans les champs html, par ex: name='title'/'content'
+     * = : précisera que key correspond bien à key
+     * $i = 1 => représente la première boucle
+     * $comma => correspond à une eventuelle virgule ou espace
      */
     public function update(int $id, array $data, ?array $relations = null)
     {
         $sqlRequestPart = "";
         $i = 1;
 
+        /** $comma
+         * si $i === count($data) donc est strictement égal à la valeur de fin d'itération du tableau alors fin avec '? " "' (espace)
+         * sinon ": ', '" virgule en attendant la fin
+         * virgule soit espace stocké dans $comma
+         */
         foreach ($data as $key => $value) {
             $comma = $i === count($data) ? "" : ', ';
             $sqlRequestPart .= "{$key} = :{$key}{$comma}";
@@ -72,6 +82,7 @@ abstract class Model
         $data['id'] = $id;
         /** UPDATE
          * cherche à MAJ les composants de la table choisie à l'aide de ':'
+         * requête préparée -> indique un param obligatoirement avec $data => tableau(array)
          */
         return $this->query("UPDATE {$this->table} SET {$sqlRequestPart} WHERE id = :id", $data);
     }
