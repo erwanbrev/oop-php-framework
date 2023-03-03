@@ -34,7 +34,10 @@ class PostController extends Controller
 
         return $this->view('admin.post.form', compact('tags'));
     }
-
+/** lorsque le lien envoie sur /post/create
+ * quasiment le meme code que dans update()
+ * 
+ */
     public function createPost()
     {
         $this->isAdmin();

@@ -38,20 +38,28 @@ abstract class Model
          */
         return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
     }
-
+    /** create()
+     * fonction utilisée dans createPost()
+     * $i = 1; -> $i = cpt -> arrivé à la fin donc plus d'ajout de virgules
+     */
     public function create(array $data, ?array $relations = null)
     {
         $firstParenthesis = "";
         $secondParenthesis = "";
         $i = 1;
-
+        /** foreach() -> si $i === count alors espace ou virgule 
+         * $firstParenthesis => dans le cas ou notre valeur arrive à la fin -> content et un espace
+         * sinon title et une virgule
+         */
         foreach ($data as $key => $value) {
             $comma = $i === count($data) ? "" : ", ";
             $firstParenthesis .= "{$key}{$comma}";
             $secondParenthesis .= ":{$key}{$comma}";
             $i++;
         }
-
+        /** query()-> insérer dans la table la valeur de la première parenthèse (title, content) 
+         * values -> secondParenthesis()
+         */
         return $this->query("INSERT INTO {$this->table} ($firstParenthesis)
         VALUES($secondParenthesis)", $data);
     }
