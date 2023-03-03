@@ -84,19 +84,22 @@ class Post extends Model
 
         return true;
     }
-
+    /** update() 
+     * parent:: -> appelle la fonction parente update() et on lui passe les datas
+     * $stmt->execute => execute une requête préparée 
+     */
     public function update(int $id, mixed $data, ?array $relations = null)
     {
         parent::update($id, $data);
 
         $stmt = $this->db->getPDO()->prepare("DELETE FROM post_tag WHERE post_id = ?");
         $result = $stmt->execute([$id]);
-
+        // boucle sur le tableau relations
         foreach ($relations as $tagId) {
             $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
             $stmt->execute([$id, $tagId]);
         }
-
+        // si ça s'est bien passé
         if ($result) {
             return true;
         }

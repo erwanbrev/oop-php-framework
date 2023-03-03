@@ -3,7 +3,7 @@
 <?php if (isset($_GET['success'])) : ?>
     <div class="alert alert-success">Vous êtes connecté!</div>
 <?php endif ?>
-
+<!-- my-3 => margin sur l'axe des ordonnées de 3 -->
 <a href="<?= HREF_ROOT ?>admin/posts/create" class="btn btn-success my-3">Créer un nouvel article</a>
 
 <table class="table">

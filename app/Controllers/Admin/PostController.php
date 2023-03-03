@@ -62,6 +62,7 @@ class PostController extends Controller
 
         //var_dump("Model edit:", $post);
         //var_dump("Model edit:", $tags);
+        // editer un post par le chemin admin/post/form
         return $this->view('admin.post.form', compact('post', 'tags'));
         //return $this->view('admin.post.form', compact('post'));
     }
@@ -73,6 +74,8 @@ class PostController extends Controller
         $post = new Post($this->getDB());
 
         // var_dump("PostController update:",$_POST);
+        /** retirer et mettre dans une variable avec array_pop() */
+        // sépare et met à suivre deux array()
         $tags = array_pop($_POST);
         // var_dump("PostController update:",$_POST, $tags);
         $result = $post->update($id, $_POST, $tags);

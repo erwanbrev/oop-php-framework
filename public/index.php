@@ -53,7 +53,7 @@ $router->get('/logout', 'App\Controllers\UserController@logout');
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
 /** create
  * get permet de récupérer la page de création d'un post
- * post permet de créer le post pré-rempli
+ * post permet de créer un article
  */
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
