@@ -44,7 +44,11 @@ abstract class Controller
     {
         return $this->db;
     }
-
+    /** s'il est admin alors
+     * return true 
+     * sinon 
+     * return page login
+     */
     protected function isAdmin()
     {
         if (isset($_SESSION['auth']) && $_SESSION['auth'] === 1) {
